@@ -2,6 +2,12 @@
 title: "College PBP"
 output: html_document
 ---
+```{r}
+install.packages("remotes")
+remotes::install_github("BillPetti/baseballr")
+```
+Run this block only the first time you run the code, ever. It's installing the packages we're going to use so only has to be done once. Say 'yes' if it asks
+about installing dependencies
 
 ```{r}
 library(baseballr)

@@ -1,0 +1,43 @@
+---
+title: "College PBP"
+output: html_document
+---
+
+```{r}
+library(baseballr)
+library(tidyverse)
+```
+
+```{r}
+stanford_id <- ncaa_school_id_lu(school_name = "Stanford")
+```
+Stanford's school id = 674
+
+```{r}
+st_schedule <- get_ncaa_schedule_info(teamid = 674, year = 2018)
+```
+
+```{r}
+pbp_1 <- get_ncaa_baseball_pbp("https://stats.ncaa.org/contests/85299/box_score")
+```
+
+```{r}
+eighteen_pbp <- data.frame(matrix(ncol = 9, nrow = 0))
+
+datalist = list()
+
+for (i in 1:length(st_schedule$game_info_url)) {
+  row <- i
+  curr <- st_schedule[i,8]
+  game <- get_ncaa_baseball_pbp(curr)
+  datalist[[i]] = game
+}
+
+eighteen_pbp <- do.call(rbind, datalist)
+```
+
+```{r}
+write.csv(eighteen_pbp, "~/Desktop/Stanford_2018_pbp.csv")
+```
+
+
